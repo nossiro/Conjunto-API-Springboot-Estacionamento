@@ -15,7 +15,7 @@ public class ParkingMapper {
 
     private static final ModelMapper MODEL_MAPPER = new ModelMapper();
 
-    public ParkingDTO toParkingDTO(Parking parking){
+    public ParkingDTO toParkingDTO(Parking parking) {
         return MODEL_MAPPER.map(parking, ParkingDTO.class);
     }
 
@@ -23,11 +23,11 @@ public class ParkingMapper {
         return parkingList.stream().map(this::toParkingDTO).collect(Collectors.toList());
     }
 
-    public Parking toParParking(ParkingDTO dto) {
+    public Parking toParking(ParkingDTO dto) {
         return MODEL_MAPPER.map(dto, Parking.class);
     }
 
-    public Parking toParParkingCreate(ParkingCreateDTO dto) {
+    public Parking toParkingCreate(ParkingCreateDTO dto) {
         return MODEL_MAPPER.map(dto, Parking.class);
     }
 }
