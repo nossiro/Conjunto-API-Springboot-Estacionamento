@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import one.digitalinnovation.parking.exception.ParkingNotFoundException;
 import one.digitalinnovation.parking.model.Parking;
@@ -14,24 +15,23 @@ import one.digitalinnovation.repository.ParkingRepository;
 public class ParkingService {
 
     private final ParkingRepository parkingRepository;
-    
+
     public ParkingService(ParkingRepository parkingRepository) {
         this.parkingRepository = parkingRepository;
     }
 
+    @Transactional(readOnly = true)
     public List<Parking> findAll() {
         return parkingRepository.findAll();
     }
 
-    private static String getUUID(){
-        return UUID.randomUUID().toString().replace("-", "-");
-    }
-
+    @Transactional(readOnly = true)
     public Parking findById(String id) {
-            return parkingRepository.findById(id).orElseThrow(
-                    () -> new ParkingNotFoundException(id));
+        return parkingRepository.findById(id).orElseThrow(
+                () -> new ParkingNotFoundException(id));
     }
 
+    @Transactional
     public Parking create(Parking parkingCreate) {
         String uuid = getUUID();
         parkingCreate.setId(uuid);
@@ -40,11 +40,13 @@ public class ParkingService {
         return parkingCreate;
     }
 
-    public void delete(String id){
+    @Transactional
+    public void delete(String id) {
         findById(id);
         parkingRepository.deleteById(id);
     }
 
+    @Transactional
     public Parking update(String id, Parking parkingCreate) {
         Parking parking = findById(id);
         parking.setColor(parkingCreate.getColor());
@@ -55,10 +57,15 @@ public class ParkingService {
         return parking;
     }
 
+    @Transactional
     public Parking exit(String id) {
         Parking parking = findById(id);
         parking.setExitDate(LocalDateTime.now());
         parking.setBill(ParkingExit.getBill(parking));
         return parkingRepository.save(parking);
+    }
+
+    private static String getUUID() {
+        return UUID.randomUUID().toString().replace("-", "");
     }
 }
