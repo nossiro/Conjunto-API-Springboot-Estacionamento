@@ -1,5 +1,4 @@
 # Conjunto-API-Springboot-Estacionamento
 Nesse projeto foi desenvolvido um um conjunto de API’s utilizando Spring Boot para controlar um estacionamento de veículos. Nele, são controlados a entrada, saída e valor a ser cobrado do cliente. Foram utilizadas as boas práticas de desenvolvimento de API’s incluindo segurança com Spring Security e acesso a banco de dados PostgreSQL.
-
-## Run database
-docker run --name parking-db -p 5432:5432 -e POSTGRES_DB=parking -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=123 -d postgres:10-alpine
+Algumas questões referentes ao Heroku e aos testes ainda precisam ser aprimorados, mas o projeto continuará em andamento como forma de estudos.
+Este projeto foi idealizado e guiado pelo professor **Sandro Giacomozzi** no módulo [Realizando Deploy na Nuvem de um Conjunto de API’s Desenvolvida em Spring Boot](https://web.dio.me/project/realizando-deploy-na-nuvem-de-um-conjunto-de-apis-desenvolvida-em-spring-boot/learning/064f166c-436f-4194-bb8d-00b2eab00503?back=/track/quebec-java-digital&tab=undefined&moduleId=undefined) do bootcamp **Québec Java Digital** da [dio](https://www.dio.me/).
